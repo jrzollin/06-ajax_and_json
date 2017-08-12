@@ -62,5 +62,11 @@ Article.fetchAll = function() {
     // cache it in localStorage so we can skip the server call next time,
     // then load all the data into Article.all with the .loadAll function above,
     // and then render the index page.
+    var $jsonData = $.getJson('/data/hackeripsum.json');
+    localStorage.rawData = JSON.stringify($jsonData);
+    Article.all.loadAll($jsonData);
+    Article.all.forEach(function(article) {
+      $('#articles').append(article.toHtml());
+    });
   }
 }
